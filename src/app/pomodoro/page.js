@@ -96,6 +96,19 @@ const PomodoroPage = () => {
                         {isRunning ? 'Pause' : 'Resume'}
                     </button>
                 </div>
+                {/* Reset button */}
+                <div className="flex justify-center mt-4">
+                    <button
+                        onClick={() => {
+                            setTimeLeft(initialTime);
+                            setTotalTime(initialTime);
+                            setIsRunning(false);
+                        }}
+                        className="text-white px-6 py-2 rounded hover:bg-gray-600 transition-colors"
+                    >
+                        Reset
+                    </button>
+                </div>
             </div>
         </div>
     );
