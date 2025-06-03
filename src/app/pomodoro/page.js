@@ -51,6 +51,8 @@ const PomodoroPage = () => {
         setHasStarted(true);
     };
 
+ 
+
     const progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
 
     return (
@@ -64,13 +66,13 @@ const PomodoroPage = () => {
 
                 {/* Buttons */}
                 <div className='flex justify-between mb-4'>
-                    <button onClick={startFocus} className="text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors">
+                    <button onClick={startFocus} className="text-gray-500 px-4 py-2 rounded hover:bg-gray-700 hover:text-white transition-colors">
                         Focus now
                     </button>
-                    <button onClick={startShortBreak} className="ml-4 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors">
+                    <button onClick={startShortBreak} className="ml-4 text-gray-500 px-4 py-2 rounded hover:bg-gray-700  hover:text-white transition-colors">
                         Short Break
                     </button>
-                    <button onClick={startLongBreak} className="ml-4 text-white px-4 py-2 rounded hover:bg-gray-600 transition-colors">
+                    <button onClick={startLongBreak} className="ml-4 text-gray-500 px-4 py-2 rounded hover:bg-gray-700 hover:text-white transition-colors">
                         Long Break
                     </button>
                 </div>
@@ -82,17 +84,45 @@ const PomodoroPage = () => {
                 <div className="text-white text-8xl font-bold text-center mb-4">
                     {formatTime(timeLeft)}
                 </div>
-
                 {/* Progress bar directly under the timer */}
                 <div className="w-full h-2 bg-gray-700 rounded mb-6 overflow-hidden">
                     <div
-                        className="h-full bg-green-500 transition-all duration-100 linear"
+                        className="h-full bg-white transition-all duration-100 linear"
                         style={{ width: `${progressPercent}%` }}
                     />
                 </div>
-
+                {/* Additonal time */}
+                <div className="flex justify-center gap-4 mt-30">
+                    <button
+                        onClick={() => {
+                            setTimeLeft(prev => prev + 25 * 60);
+                            setTotalTime(prev => prev + 25 * 60);
+                        }}
+                        className="text-gray-500 px-4 py-2  hover:text-white"
+                    >
+                        +25
+                    </button>
+                    <button
+                        onClick={() => {
+                            setTimeLeft(prev => prev + 10 * 60);
+                            setTotalTime(prev => prev + 10 * 60);
+                        }}
+                        className="text-gray-500 px-4 py-2   hover:text-white "
+                    >
+                        +10
+                    </button>
+                    <button
+                        onClick={() => {
+                            setTimeLeft(prev => prev + 5 * 60);
+                            setTotalTime(prev => prev + 5 * 60);
+                        }}
+                        className="text-gray-500 px-4 py-2  hover:text-white"
+                    >
+                        +5
+                    </button>
+                </div>
                 {/* Pause/Resume button */}
-                <div className="flex justify-center">
+                <div className="flex justify-center mt-10">
                     <button
                         onClick={() => {
                             if (!hasStarted) {
@@ -107,6 +137,7 @@ const PomodoroPage = () => {
                         {!hasStarted ? 'Start' :  isRunning ? 'Pause' :'Resume'}
                     </button>
                 {/* Reset button */}
+                {hasStarted && (
                     <button
                         onClick={() => {
                             setTimeLeft(initialTime);
@@ -118,6 +149,7 @@ const PomodoroPage = () => {
                     >
                         Reset
                     </button>
+            )}
                 </div>                
             </div>
         </div>
