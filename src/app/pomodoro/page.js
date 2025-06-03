@@ -21,8 +21,8 @@ const PomodoroPage = () => {
     useEffect(() => {
     let modeLabel = '';
     if (mode === 'focus') modeLabel = 'Focus';
-    if (mode === 'shortBreak') modeLabel = 'Short Break';
-    if (mode === 'longBreak') modeLabel = 'Long Break';
+    if (mode === 'shortBreak') modeLabel = 'Short';
+    if (mode === 'longBreak') modeLabel = 'Long';
     document.title = `${modeLabel} - ${formatTime(timeLeft)}`;
     }, [mode, timeLeft]);
 
