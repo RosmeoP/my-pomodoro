@@ -7,6 +7,7 @@ const PomodoroPage = () => {
     const [timeLeft, setTimeLeft] = useState(initialTime);
     const [isRunning, setIsRunning] = useState(false);
     const [totalTime, setTotalTime] = useState(initialTime);
+    const [hasStarted, setHasStarted] = useState(false);
 
     const formatTime = (seconds) => {
         const m = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -31,6 +32,7 @@ const PomodoroPage = () => {
         setTimeLeft(time);
         setTotalTime(time);
         setIsRunning(true);
+        setHasStarted(true);
     };
 
     const startShortBreak = () => {
@@ -38,6 +40,7 @@ const PomodoroPage = () => {
         setTimeLeft(time);
         setTotalTime(time);
         setIsRunning(true);
+        setHasStarted(true);
     };
 
     const startLongBreak = () => {
@@ -45,6 +48,7 @@ const PomodoroPage = () => {
         setTimeLeft(time);
         setTotalTime(time);
         setIsRunning(true);
+        setHasStarted(true);
     };
 
     const progressPercent = ((totalTime - timeLeft) / totalTime) * 100;
@@ -90,25 +94,31 @@ const PomodoroPage = () => {
                 {/* Pause/Resume button */}
                 <div className="flex justify-center">
                     <button
-                        onClick={() => setIsRunning(prev => !prev)}
+                        onClick={() => {
+                            if (!hasStarted) {
+                                setIsRunning(true);
+                                setHasStarted(true);
+                            }else{
+                                setIsRunning(prev => !prev);
+                            }
+                        }}
                         className="text-white px-6 py-2 rounded hover:bg-gray-600 transition-colors"
                     >
-                        {isRunning ? 'Pause' : 'Resume'}
+                        {!hasStarted ? 'Start' :  isRunning ? 'Pause' :'Resume'}
                     </button>
-                </div>
                 {/* Reset button */}
-                <div className="flex justify-center mt-4">
                     <button
                         onClick={() => {
                             setTimeLeft(initialTime);
                             setTotalTime(initialTime);
                             setIsRunning(false);
+                            setHasStarted(false);
                         }}
                         className="text-white px-6 py-2 rounded hover:bg-gray-600 transition-colors"
                     >
                         Reset
                     </button>
-                </div>
+                </div>                
             </div>
         </div>
     );
