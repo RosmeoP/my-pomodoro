@@ -1,7 +1,7 @@
 # My Pomodoro
 
 A customizable Pomodoro timer built with [Next.js](https://nextjs.org). Use this app to boost your productivity with the Pomodoro Technique—work in focused intervals, track sessions, and take regular breaks.
-
+url: https://pomodoro-pi-weld.vercel.app/
 ---
 
 ## Table of Contents
