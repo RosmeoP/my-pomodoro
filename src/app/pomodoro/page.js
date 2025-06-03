@@ -9,12 +9,22 @@ const PomodoroPage = () => {
     const [totalTime, setTotalTime] = useState(initialTime);
     const [hasStarted, setHasStarted] = useState(false);
     const [mode, setMode] =  useState('focus'); // 'focus', 'shortBreak', 'longBreak'
+   
 
     const formatTime = (seconds) => {
         const m = Math.floor(seconds / 60).toString().padStart(2, '0');
         const s = (seconds % 60).toString().padStart(2, '0');
         return `${m}:${s}`;
     };
+   
+
+    useEffect(() => {
+    let modeLabel = '';
+    if (mode === 'focus') modeLabel = 'Focus';
+    if (mode === 'shortBreak') modeLabel = 'Short Break';
+    if (mode === 'longBreak') modeLabel = 'Long Break';
+    document.title = `${modeLabel} - ${formatTime(timeLeft)}`;
+    }, [mode, timeLeft]);
 
     useEffect(() => {
         let timer;
@@ -61,6 +71,7 @@ const PomodoroPage = () => {
 
     return (
         <div className="bg-black min-h-screen flex items-start justify-center p-6 sm:p-10 font-[family-name:var(--font-geist-sans)]">
+           
             <div className="w-full max-w-md">
                 {/* Header */}
                 <div className="flex flex-col items-center justify-center gap-2 mb-6">
