@@ -8,6 +8,7 @@ const PomodoroPage = () => {
     const [isRunning, setIsRunning] = useState(false);
     const [totalTime, setTotalTime] = useState(initialTime);
     const [hasStarted, setHasStarted] = useState(false);
+    const [mode, setMode] =  useState('focus'); // 'focus', 'shortBreak', 'longBreak'
 
     const formatTime = (seconds) => {
         const m = Math.floor(seconds / 60).toString().padStart(2, '0');
@@ -33,6 +34,7 @@ const PomodoroPage = () => {
         setTotalTime(time);
         setIsRunning(true);
         setHasStarted(true);
+        setMode('focus');
     };
 
     const startShortBreak = () => {
@@ -41,6 +43,7 @@ const PomodoroPage = () => {
         setTotalTime(time);
         setIsRunning(true);
         setHasStarted(true);
+        setMode('shortBreak');
     };
 
     const startLongBreak = () => {
@@ -49,6 +52,7 @@ const PomodoroPage = () => {
         setTotalTime(time);
         setIsRunning(true);
         setHasStarted(true);
+        setMode('longBreak');
     };
 
  
@@ -65,18 +69,32 @@ const PomodoroPage = () => {
                 </div>
 
                 {/* Buttons */}
-                <div className='flex justify-between mb-4'>
-                    <button onClick={startFocus} className="text-gray-500 px-4 py-2 rounded hover:bg-gray-700 hover:text-white transition-colors">
-                        Focus now
-                    </button>
-                    <button onClick={startShortBreak} className="ml-4 text-gray-500 px-4 py-2 rounded hover:bg-gray-700  hover:text-white transition-colors">
-                        Short Break
-                    </button>
-                    <button onClick={startLongBreak} className="ml-4 text-gray-500 px-4 py-2 rounded hover:bg-gray-700 hover:text-white transition-colors">
-                        Long Break
-                    </button>
-                </div>
-
+              <div className='flex justify-between mb-4'>
+                <button
+                    onClick={startFocus}
+                    className={`text-gray-500 px-4 py-2 rounded transition-colors ${
+                        mode === "focus" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"
+                    }`}
+                >
+                    Focus now
+                </button>
+                <button
+                    onClick={startShortBreak}
+                    className={`ml-4 text-gray-500 px-4 py-2 rounded transition-colors ${
+                        mode === "shortBreak" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"
+                    }`}
+                >
+                    Short Break
+                </button>
+                <button
+                    onClick={startLongBreak}
+                    className={`ml-4 text-gray-500 px-4 py-2 rounded transition-colors ${
+                        mode === "longBreak" ? "bg-gray-700 text-white" : "hover:bg-gray-700 hover:text-white"
+                    }`}
+                >
+                    Long Break
+                </button>
+            </div>
                 {/* White separator bar with more margin */}
                 <div className="h-[2px] bg-white w-full mt-8 mb-32 rounded"></div>
 
